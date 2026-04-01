@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<!-- saved from url=(0121)file:///Users/jasminaljubovic/Documents/Enchante%CC%81/Conversations/03909E32-130E-47C5-93B4-E2B3E291C3FF/test-cases.html -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Cases</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #fff;
+      --border: #d2d2d7;
+      --accent: #0071e3;
+      --accent-light: #e8f0fb;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --pass: #1a7f37;
+      --pass-bg: #dafbe1;
+      --warn: #9a6700;
+      --warn-bg: #fff8c5;
+      --fail: #cf222e;
+      --fail-bg: #ffebe9;
+      --info: #0550ae;
+      --info-bg: #ddf4ff;
+      --purple: #6e40c9;
+      --purple-bg: #f3eeff;
+      --r: 10px;
+      --sh: 0 1px 4px rgba(0, 0, 0, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 80px
+    }
+
+    /* Header */
+    .header {
+      background: var(--surface);
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      padding: 30px 34px;
+      margin-bottom: 24px;
+      box-shadow: var(--sh)
+    }
+
+    .header h1 {
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      margin-bottom: 3px
+    }
+
+    .header .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px
+    }
+
+    .meta-item {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--border)
+    }
+
+    .meta-item .lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+      margin-bottom: 2px
+    }
+
+    .meta-item .val {
+      font-size: 13px;
+      font-weight: 600
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: var(--sh)
+    }
+
+    .stat .n {
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 3px
+    }
+
+    .stat .l {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: var(--muted)
+    }
+
+    /* Badges */
+    .b {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      white-space: nowrap
+    }
+
+    .b-pos {
+      background: var(--pass-bg);
+      color: var(--pass)
+    }
+
+    .b-neg {
+      background: var(--fail-bg);
+      color: var(--fail)
+    }
+
+    .b-ui {
+      background: var(--accent-light);
+      color: var(--info)
+    }
+
+    .b-api {
+      background: var(--purple-bg);
+      color: var(--purple)
+    }
+
+    .b-high {
+      background: var(--fail-bg);
+      color: var(--fail)
+    }
+
+    .b-med {
+      background: var(--warn-bg);
+      color: var(--warn)
+    }
+
+    .b-low {
+      background: var(--pass-bg);
+      color: var(--pass)
+    }
+
+    .b-man {
+      background: #f0f0f5;
+      color: #3a3a3c
+    }
+
+    .b-auto {
+      background: var(--accent-light);
+      color: var(--info)
+    }
+
+    /* Feature block */
+    .feature {
+      background: var(--surface);
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      margin-bottom: 22px;
+      box-shadow: var(--sh);
+      overflow: hidden
+    }
+
+    .feature-header {
+      padding: 15px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .feature-header:hover {
+      background: #fafafa
+    }
+
+    .ficon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0
+    }
+
+    .fi-blue {
+      background: var(--accent-light)
+    }
+
+    .fi-green {
+      background: var(--pass-bg)
+    }
+
+    .ftitle {
+      font-size: 15px;
+      font-weight: 600;
+      flex: 1
+    }
+
+    .fcnt {
+      font-size: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1px 8px;
+      color: var(--muted)
+    }
+
+    .toggle {
+      font-size: 11px;
+      color: var(--muted);
+      transition: transform .2s
+    }
+
+    .feature-body {
+      padding: 0
+    }
+
+    .feature-body.collapsed {
+      display: none
+    }
+
+    /* Group header */
+    .group {
+      padding: 10px 22px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .group-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted)
+    }
+
+    .group-count {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    /* Table */
+    .tc-wrap {
+      overflow-x: auto
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px
+    }
+
+    thead th {
+      background: var(--bg);
+      padding: 9px 12px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border)
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border)
+    }
+
+    tbody tr:last-child {
+      border-bottom: none
+    }
+
+    tbody tr:hover {
+      background: #fafafa
+    }
+
+    tbody td {
+      padding: 10px 12px;
+      vertical-align: top
+    }
+
+    .tid {
+      font-family: "SF Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap
+    }
+
+    .ttitle {
+      font-weight: 500;
+      font-size: 13px
+    }
+
+    .tdesc {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .steps ol {
+      padding-left: 15px;
+      margin: 0
+    }
+
+    .steps ol li {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 2px
+    }
+
+    .exp {
+      font-size: 12px
+    }
+
+    .api-box {
+      font-family: "SF Mono", monospace;
+      font-size: 11px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px 7px;
+      color: var(--purple);
+      white-space: nowrap
+    }
+
+    .resp-box {
+      font-family: "SF Mono", monospace;
+      font-size: 11px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px 7px;
+      white-space: nowrap
+    }
+
+    .resp-200 {
+      color: var(--pass)
+    }
+
+    .resp-201 {
+      color: var(--pass)
+    }
+
+    .resp-400 {
+      color: var(--warn)
+    }
+
+    .resp-401 {
+      color: var(--fail)
+    }
+
+    .resp-301 {
+      color: var(--info)
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+      align-items: center
+    }
+
+    .filter-btn {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent)
+    }
+
+    .filter-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    .note {
+      background: var(--info-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--info);
+      margin: 16px 22px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Test Cases</h1>
+      <div class="sub">Login &amp; New Test Case Features — UI &amp; API, Positive &amp; Negative Scenarios</div>
+      <div class="meta">
+        <div class="meta-item">
+          <div class="lbl">Document ID</div>
+          <div class="val">TC-001</div>
+        </div>
+        <div class="meta-item">
+          <div class="lbl">Related Plan</div>
+          <div class="val">TP-001</div>
+        </div>
+        <div class="meta-item">
+          <div class="lbl">Version</div>
+          <div class="val">1.0</div>
+        </div>
+        <div class="meta-item">
+          <div class="lbl">Status</div>
+          <div class="val">Draft</div>
+        </div>
+        <div class="meta-item">
+          <div class="lbl">Features</div>
+          <div class="val">Login, New Test Case</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="n">40</div>
+        <div class="l">Total Cases</div>
+      </div>
+      <div class="stat">
+        <div class="n">22</div>
+        <div class="l">UI Cases</div>
+      </div>
+      <div class="stat">
+        <div class="n">18</div>
+        <div class="l">API Cases</div>
+      </div>
+      <div class="stat">
+        <div class="n">22</div>
+        <div class="l">Positive</div>
+      </div>
+      <div class="stat">
+        <div class="n">18</div>
+        <div class="l">Negative</div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterAll()">All</button>
+      <button class="filter-btn" onclick="filterRows(&#39;ui&#39;)">UI Only</button>
+      <button class="filter-btn" onclick="filterRows(&#39;api&#39;)">API Only</button>
+      <button class="filter-btn" onclick="filterRows(&#39;pos&#39;)">Positive Only</button>
+      <button class="filter-btn" onclick="filterRows(&#39;neg&#39;)">Negative Only</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- FEATURE: LOGIN -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="feature" id="f-login">
+      <div class="feature-header" onclick="toggle(this)">
+        <div class="ficon fi-blue">🔐</div>
+        <div class="ftitle">Login</div>
+        <span class="fcnt">20 cases</span>
+        <span class="toggle">▼</span>
+      </div>
+      <div class="feature-body">
+
+        <!-- UI Positive -->
+        <div class="group"><span class="b b-ui">UI</span>&nbsp;<span class="b b-pos">Positive</span><span
+            class="group-count" style="margin-left:8px">6 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Preconditions</th>
+                <th>Steps</th>
+                <th>Expected Result</th>
+                <th>Priority</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="ui pos login">
+                <td class="tid">LGN-UI-P-01</td>
+                <td class="ttitle">Successful login redirects to dashboard</td>
+                <td class="tdesc">Valid user account exists. App loaded over HTTPS.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to /login</li>
+                    <li>Enter valid email</li>
+                    <li>Enter valid password</li>
+                    <li>Click Login button</li>
+                  </ol>
+                </td>
+                <td class="exp">User is redirected to the dashboard page. No error message shown.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos login">
+                <td class="tid">LGN-UI-P-02</td>
+                <td class="ttitle">Remember Me extends session beyond default timeout</td>
+                <td class="tdesc">Valid user account. Standard session timeout known.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Log in with Remember Me toggled ON</li>
+                    <li>Close and reopen browser after default session timeout</li>
+                  </ol>
+                </td>
+                <td class="exp">User remains logged in. No re-authentication prompt.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-man">Manual</span></td>
+              </tr>
+              <tr data-tags="ui pos login">
+                <td class="tid">LGN-UI-P-03</td>
+                <td class="ttitle">Forgot Password link navigates to forgot password page</td>
+                <td class="tdesc">App loaded at /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to /login</li>
+                    <li>Click Forgot Password link</li>
+                  </ol>
+                </td>
+                <td class="exp">User is redirected to the Forgot Password page.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos login">
+                <td class="tid">LGN-UI-P-04</td>
+                <td class="ttitle">Admin link navigates to admin login page</td>
+                <td class="tdesc">App loaded at /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to /login</li>
+                    <li>Click Admin link in top menu</li>
+                  </ol>
+                </td>
+                <td class="exp">User is navigated to the admin login page.</td>
+                <td><span class="b b-med">Medium</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos login">
+                <td class="tid">LGN-UI-P-05</td>
+                <td class="ttitle">Login menu link navigates to /login</td>
+                <td class="tdesc">User is on a page other than /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to any non-login page</li>
+                    <li>Click Login link in top menu</li>
+                  </ol>
+                </td>
+                <td class="exp">User is redirected to /login.</td>
+                <td><span class="b b-low">Low</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos login">
+                <td class="tid">LGN-UI-P-06</td>
+                <td class="ttitle">Password input is masked</td>
+                <td class="tdesc">App loaded at /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to /login</li>
+                    <li>Click the Password field</li>
+                    <li>Type any characters</li>
+                  </ol>
+                </td>
+                <td class="exp">Characters are displayed as dots or asterisks. Plain text is not visible.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- UI Negative -->
+        <div class="group"><span class="b b-ui">UI</span>&nbsp;<span class="b b-neg">Negative</span><span
+            class="group-count" style="margin-left:8px">6 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Preconditions</th>
+                <th>Steps</th>
+                <th>Expected Result</th>
+                <th>Priority</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="ui neg login">
+                <td class="tid">LGN-UI-N-01</td>
+                <td class="ttitle">Invalid credentials shows error message</td>
+                <td class="tdesc">App loaded at /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Enter valid email</li>
+                    <li>Enter incorrect password</li>
+                    <li>Click Login</li>
+                  </ol>
+                </td>
+                <td class="exp">Error message displayed. User remains on /login. No redirect.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg login">
+                <td class="tid">LGN-UI-N-02</td>
+                <td class="ttitle">Empty email blocks submission — no backend call fired</td>
+                <td class="tdesc">Network monitoring active.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Leave email empty</li>
+                    <li>Enter any password</li>
+                    <li>Click Login</li>
+                    <li>Inspect network requests</li>
+                  </ol>
+                </td>
+                <td class="exp">Form does not submit. No API call made. Inline error shown on email field.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg login">
+                <td class="tid">LGN-UI-N-03</td>
+                <td class="ttitle">Empty password blocks submission — no backend call fired</td>
+                <td class="tdesc">Network monitoring active.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Enter valid email</li>
+                    <li>Leave password empty</li>
+                    <li>Click Login</li>
+                    <li>Inspect network requests</li>
+                  </ol>
+                </td>
+                <td class="exp">Form does not submit. No API call made. Inline error shown on password field.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg login">
+                <td class="tid">LGN-UI-N-04</td>
+                <td class="ttitle">Invalid email format shows validation error</td>
+                <td class="tdesc">App loaded at /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Enter "notanemail" in email field</li>
+                    <li>Enter any password</li>
+                    <li>Click Login</li>
+                  </ol>
+                </td>
+                <td class="exp">Inline email validation error displayed. Form does not submit.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg login">
+                <td class="tid">LGN-UI-N-05</td>
+                <td class="ttitle">Both fields empty shows individual error messages</td>
+                <td class="tdesc">App loaded at /login.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Leave both email and password empty</li>
+                    <li>Click Login</li>
+                  </ol>
+                </td>
+                <td class="exp">Both fields display their respective inline error messages. Form does not submit.</td>
+                <td><span class="b b-med">Medium</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg login">
+                <td class="tid">LGN-UI-N-06</td>
+                <td class="ttitle">Remember Me defaults to OFF on fresh page load</td>
+                <td class="tdesc">No existing session. Fresh browser load.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to /login in a fresh session</li>
+                    <li>Observe the Remember Me toggle state</li>
+                  </ol>
+                </td>
+                <td class="exp">Remember Me toggle is in the OFF (unchecked) state by default.</td>
+                <td><span class="b b-low">Low</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- API Positive -->
+        <div class="group"><span class="b b-api">API</span>&nbsp;<span class="b b-pos">Positive</span><span
+            class="group-count" style="margin-left:8px">4 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Request</th>
+                <th>Request Body</th>
+                <th>Expected Response</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="api pos login">
+                <td class="tid">LGN-API-P-01</td>
+                <td class="ttitle">Valid credentials return 200 with session token</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "email": "valid@test.com", "password": "ValidPass1" }</code></td>
+                <td class="exp"><span class="resp-box resp-200">200 OK</span> Body contains session token or cookie.
+                  User data returned.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api pos login">
+                <td class="tid">LGN-API-P-02</td>
+                <td class="ttitle">Valid credentials with Remember Me returns extended token TTL</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "email": "valid@test.com", "password": "ValidPass1", "rememberMe": true }</code>
+                </td>
+                <td class="exp"><span class="resp-box resp-200">200 OK</span> Token or cookie expiry is longer than
+                  default session TTL.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api pos login">
+                <td class="tid">LGN-API-P-03</td>
+                <td class="ttitle">Successful login response contains expected user data</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "email": "valid@test.com", "password": "ValidPass1" }</code></td>
+                <td class="exp"><span class="resp-box resp-200">200 OK</span> Response body includes user identifier and
+                  email. Password field is absent from response.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api pos login">
+                <td class="tid">LGN-API-P-04</td>
+                <td class="ttitle">HTTP request to login is redirected to HTTPS</td>
+                <td><span class="api-box">GET http://…/login</span></td>
+                <td class="tdesc">No body required.</td>
+                <td class="exp"><span class="resp-box resp-301">301/302</span> Redirect to https:// equivalent URL.
+                  Plain HTTP access is not served.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- API Negative -->
+        <div class="group"><span class="b b-api">API</span>&nbsp;<span class="b b-neg">Negative</span><span
+            class="group-count" style="margin-left:8px">4 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Request</th>
+                <th>Request Body</th>
+                <th>Expected Response</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="api neg login">
+                <td class="tid">LGN-API-N-01</td>
+                <td class="ttitle">Wrong password returns 401</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "email": "valid@test.com", "password": "WrongPass" }</code></td>
+                <td class="exp"><span class="resp-box resp-401">401 Unauthorized</span> Error message in body. No
+                  session token returned.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg login">
+                <td class="tid">LGN-API-N-02</td>
+                <td class="ttitle">Non-existent email returns 401</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "email": "nobody@test.com", "password": "AnyPass1" }</code></td>
+                <td class="exp"><span class="resp-box resp-401">401 Unauthorized</span> Generic error message. Does not
+                  reveal whether email exists.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg login">
+                <td class="tid">LGN-API-N-03</td>
+                <td class="ttitle">Missing email field returns 400</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code style="font-size:11px">{ "password": "ValidPass1" }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error indicating email
+                  is required.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg login">
+                <td class="tid">LGN-API-N-04</td>
+                <td class="ttitle">Missing password field returns 400</td>
+                <td><span class="api-box">POST /login</span></td>
+                <td class="tdesc"><code style="font-size:11px">{ "email": "valid@test.com" }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error indicating
+                  password is required.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /feature-body -->
+    </div><!-- /login -->
+
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- FEATURE: NEW TEST CASE -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="feature" id="f-ntc">
+      <div class="feature-header" onclick="toggle(this)">
+        <div class="ficon fi-green">📝</div>
+        <div class="ftitle">New Test Case</div>
+        <span class="fcnt">20 cases</span>
+        <span class="toggle">▼</span>
+      </div>
+      <div class="feature-body">
+
+        <!-- UI Positive -->
+        <div class="group"><span class="b b-ui">UI</span>&nbsp;<span class="b b-pos">Positive</span><span
+            class="group-count" style="margin-left:8px">6 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Preconditions</th>
+                <th>Steps</th>
+                <th>Expected Result</th>
+                <th>Priority</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="ui pos ntc">
+                <td class="tid">NTC-UI-P-01</td>
+                <td class="ttitle">Submit with all required fields saves the test case</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Fill in Title</li>
+                    <li>Fill in Expected Result</li>
+                    <li>Add at least one Test Step</li>
+                    <li>Click Submit</li>
+                  </ol>
+                </td>
+                <td class="exp">Test case is saved. User is navigated to Test Case List. New entry is visible in the
+                  list.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos ntc">
+                <td class="tid">NTC-UI-P-02</td>
+                <td class="ttitle">Submit without Description succeeds</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Fill Title, Expected Result, and one Test Step</li>
+                    <li>Leave Description empty</li>
+                    <li>Click Submit</li>
+                  </ol>
+                </td>
+                <td class="exp">Test case saved successfully. Description is absent or empty in the saved record.</td>
+                <td><span class="b b-med">Medium</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos ntc">
+                <td class="tid">NTC-UI-P-03</td>
+                <td class="ttitle">Multiple test steps are saved in correct order</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Add 3 test steps: "Step A", "Step B", "Step C"</li>
+                    <li>Click Submit</li>
+                    <li>Open the saved test case</li>
+                  </ol>
+                </td>
+                <td class="exp">Steps appear in the saved record in the exact order: Step A, Step B, Step C.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos ntc">
+                <td class="tid">NTC-UI-P-04</td>
+                <td class="ttitle">Automated toggle can be enabled and is saved</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Fill all required fields</li>
+                    <li>Toggle Automated to ON</li>
+                    <li>Click Submit</li>
+                    <li>Open saved test case</li>
+                  </ol>
+                </td>
+                <td class="exp">Saved test case has Automated flag set to true.</td>
+                <td><span class="b b-med">Medium</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos ntc">
+                <td class="tid">NTC-UI-P-05</td>
+                <td class="ttitle">Back arrow navigates to Test Case List</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to New Test Case page</li>
+                    <li>Click the back arrow</li>
+                  </ol>
+                </td>
+                <td class="exp">User is returned to the Test Case List page.</td>
+                <td><span class="b b-med">Medium</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui pos ntc">
+                <td class="tid">NTC-UI-P-06</td>
+                <td class="ttitle">Automated toggle defaults to OFF on page load</td>
+                <td class="tdesc">New Test Case page loaded fresh.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Navigate to New Test Case page</li>
+                    <li>Observe Automated toggle state without interacting</li>
+                  </ol>
+                </td>
+                <td class="exp">Automated toggle is in the OFF state by default.</td>
+                <td><span class="b b-low">Low</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- UI Negative -->
+        <div class="group"><span class="b b-ui">UI</span>&nbsp;<span class="b b-neg">Negative</span><span
+            class="group-count" style="margin-left:8px">4 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Preconditions</th>
+                <th>Steps</th>
+                <th>Expected Result</th>
+                <th>Priority</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="ui neg ntc">
+                <td class="tid">NTC-UI-N-01</td>
+                <td class="ttitle">Submit without Title shows inline error</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Leave Title empty</li>
+                    <li>Fill Expected Result and at least one Step</li>
+                    <li>Click Submit</li>
+                  </ol>
+                </td>
+                <td class="exp">Inline error shown on the Title field. Form does not submit.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg ntc">
+                <td class="tid">NTC-UI-N-02</td>
+                <td class="ttitle">Submit without Expected Result shows inline error</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Fill Title and one Test Step</li>
+                    <li>Leave Expected Result empty</li>
+                    <li>Click Submit</li>
+                  </ol>
+                </td>
+                <td class="exp">Inline error shown on Expected Result field. Form does not submit.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg ntc">
+                <td class="tid">NTC-UI-N-03</td>
+                <td class="ttitle">Submit without any Test Steps shows inline error</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Fill Title and Expected Result</li>
+                    <li>Leave Test Steps empty</li>
+                    <li>Click Submit</li>
+                  </ol>
+                </td>
+                <td class="exp">Inline error shown on the Test Steps section. Form does not submit.</td>
+                <td><span class="b b-high">High</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+              <tr data-tags="ui neg ntc">
+                <td class="tid">NTC-UI-N-04</td>
+                <td class="ttitle">Enter key does not submit form when required fields are invalid</td>
+                <td class="tdesc">New Test Case page loaded.</td>
+                <td class="steps">
+                  <ol>
+                    <li>Fill Title only</li>
+                    <li>Focus any field</li>
+                    <li>Press Enter</li>
+                  </ol>
+                </td>
+                <td class="exp">Form is not submitted. Validation errors appear for remaining required fields.</td>
+                <td><span class="b b-med">Medium</span></td>
+                <td><span class="b b-auto">Automated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- API Positive -->
+        <div class="group"><span class="b b-api">API</span>&nbsp;<span class="b b-pos">Positive</span><span
+            class="group-count" style="margin-left:8px">4 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Request</th>
+                <th>Request Body</th>
+                <th>Expected Response</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="api pos ntc">
+                <td class="tid">NTC-API-P-01</td>
+                <td class="ttitle">All required fields return 201 and created record</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "Test title", "expectedResult": "Pass", "steps": ["Step 1"] }</code>
+                </td>
+                <td class="exp"><span class="resp-box resp-201">201 Created</span> Response body contains the created
+                  test case with generated ID.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api pos ntc">
+                <td class="tid">NTC-API-P-02</td>
+                <td class="ttitle">Omitting optional Description returns 201</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "No desc", "expectedResult": "Pass", "steps": ["Step 1"] }</code>
+                </td>
+                <td class="exp"><span class="resp-box resp-201">201 Created</span> Record saved. Description field is
+                  null or absent in response.</td>
+                <td><span class="b b-med">Medium</span></td>
+              </tr>
+              <tr data-tags="api pos ntc">
+                <td class="tid">NTC-API-P-03</td>
+                <td class="ttitle">Multiple steps are persisted in correct order</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "T", "expectedResult": "P", "steps": ["Step A","Step B","Step C"] }</code>
+                </td>
+                <td class="exp"><span class="resp-box resp-201">201 Created</span> Response steps array: ["Step A",
+                  "Step B", "Step C"] — order preserved.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api pos ntc">
+                <td class="tid">NTC-API-P-04</td>
+                <td class="ttitle">Setting automated flag to true is persisted</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "T", "expectedResult": "P", "steps": ["S1"], "automated": true }</code>
+                </td>
+                <td class="exp"><span class="resp-box resp-201">201 Created</span> Response contains <code
+                    style="font-size:11px">"automated": true</code>.</td>
+                <td><span class="b b-med">Medium</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- API Negative -->
+        <div class="group"><span class="b b-api">API</span>&nbsp;<span class="b b-neg">Negative</span><span
+            class="group-count" style="margin-left:8px">6 cases</span></div>
+        <div class="tc-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Request</th>
+                <th>Request Body</th>
+                <th>Expected Response</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tags="api neg ntc">
+                <td class="tid">NTC-API-N-01</td>
+                <td class="ttitle">Missing title returns 400</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code style="font-size:11px">{ "expectedResult": "Pass", "steps": ["Step 1"] }</code>
+                </td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error: title is
+                  required.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg ntc">
+                <td class="tid">NTC-API-N-02</td>
+                <td class="ttitle">Empty title string returns 400</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "", "expectedResult": "Pass", "steps": ["Step 1"] }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error: title must not
+                  be empty.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg ntc">
+                <td class="tid">NTC-API-N-03</td>
+                <td class="ttitle">Missing expectedResult returns 400</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code style="font-size:11px">{ "title": "Test", "steps": ["Step 1"] }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error: expectedResult
+                  is required.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg ntc">
+                <td class="tid">NTC-API-N-04</td>
+                <td class="ttitle">Missing steps field returns 400</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code style="font-size:11px">{ "title": "Test", "expectedResult": "Pass" }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error: at least one
+                  step is required.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg ntc">
+                <td class="tid">NTC-API-N-05</td>
+                <td class="ttitle">Empty steps array returns 400</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "Test", "expectedResult": "Pass", "steps": [] }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error: steps array
+                  must contain at least one step.</td>
+                <td><span class="b b-high">High</span></td>
+              </tr>
+              <tr data-tags="api neg ntc">
+                <td class="tid">NTC-API-N-06</td>
+                <td class="ttitle">Whitespace-only title returns 400</td>
+                <td><span class="api-box">POST /test-cases</span></td>
+                <td class="tdesc"><code
+                    style="font-size:11px">{ "title": "   ", "expectedResult": "Pass", "steps": ["Step 1"] }</code></td>
+                <td class="exp"><span class="resp-box resp-400">400 Bad Request</span> Validation error: title must not
+                  be blank.</td>
+                <td><span class="b b-med">Medium</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /feature-body -->
+    </div><!-- /ntc -->
+
+    <div class="note">API endpoint paths used in this document (e.g. <code>/login</code>, <code>/test-cases</code>) are
+      indicative. Confirm exact routes with the development team before executing API test cases.</div>
+
+  </div><!-- /page -->
+
+  <script>
+    function toggle(header) {
+      const body = header.nextElementSibling;
+      const icon = header.querySelector('.toggle');
+      const collapsed = body.classList.toggle('collapsed');
+      icon.style.transform = collapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
+    }
+
+    function filterAll() {
+      document.querySelectorAll('tr[data-tags]').forEach(r => r.style.display = '');
+      document.querySelectorAll('.group').forEach(g => g.style.display = '');
+      setActive(document.querySelector('.filter-btn'));
+    }
+
+    function filterRows(tag) {
+      document.querySelectorAll('tr[data-tags]').forEach(r => {
+        r.style.display = r.dataset.tags.includes(tag) ? '' : 'none';
+      });
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function setActive(btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+
+
+</body>
+
+</html>
