@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Automation Framework — Stakeholder Presentation</title>
+<style>
+  :root {
+    --bg: #f5f5f7; --surface: #fff; --border: #d2d2d7;
+    --accent: #0071e3; --accent-light: #e8f0fb;
+    --text: #1d1d1f; --muted: #6e6e73;
+    --pass: #1a7f37; --pass-bg: #dafbe1;
+    --warn: #9a6700; --warn-bg: #fff8c5;
+    --info: #0550ae; --info-bg: #ddf4ff;
+    --purple: #6e40c9; --purple-bg: #f3eeff;
+    --r: 12px; --sh: 0 1px 4px rgba(0,0,0,.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+         background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.65; }
+  .page { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* Header */
+  .hero { background: var(--surface); border-radius: var(--r); border: 1px solid var(--border);
+          padding: 40px 44px; margin-bottom: 28px; box-shadow: var(--sh); }
+  .hero h1 { font-size: 28px; font-weight: 700; letter-spacing: -.4px; margin-bottom: 6px; }
+  .hero .sub { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+  .tag-blue   { background: var(--accent-light); color: var(--info); }
+  .tag-green  { background: var(--pass-bg);      color: var(--pass); }
+  .tag-purple { background: var(--purple-bg);    color: var(--purple); }
+  .tag-warn   { background: var(--warn-bg);      color: var(--warn); }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 12px; margin-bottom: 24px; }
+  .stat  { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+           padding: 18px; text-align: center; box-shadow: var(--sh); }
+  .stat .n { font-size: 30px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+  .stat .l { font-size: 11px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); }
+
+  /* Section */
+  .section { background: var(--surface); border-radius: var(--r); border: 1px solid var(--border);
+             margin-bottom: 20px; box-shadow: var(--sh); overflow: hidden; }
+  .section-header { padding: 16px 24px; border-bottom: 1px solid var(--border);
+                    display: flex; align-items: center; gap: 10px;
+                    cursor: pointer; user-select: none; }
+  .section-header:hover { background: #fafafa; }
+  .sicon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center;
+           justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .si-blue   { background: var(--accent-light); }
+  .si-green  { background: var(--pass-bg); }
+  .si-purple { background: var(--purple-bg); }
+  .si-warn   { background: var(--warn-bg); }
+  .si-gray   { background: #f0f0f5; }
+  .stitle  { font-size: 16px; font-weight: 600; flex: 1; }
+  .sarrow  { font-size: 11px; color: var(--muted); transition: transform .2s; }
+  .sbody   { padding: 24px 28px; }
+  .sbody.collapsed { display: none; }
+
+  /* Prose */
+  p  { margin-bottom: 10px; font-size: 14px; line-height: 1.75; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+
+  /* Two col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .col { background: var(--bg); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
+  .col h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 10px; }
+  .col ul  { list-style: none; padding: 0; }
+  .col ul li { font-size: 13px; margin-bottom: 6px; padding-left: 16px; position: relative; }
+  .col ul li::before { content: "•"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+
+  /* Tree */
+  .tree { font-family: "SF Mono", monospace; font-size: 13px; background: #1d1d1f; color: #d1d5db;
+          border-radius: 10px; padding: 20px 24px; line-height: 1.8; overflow-x: auto; }
+  .tree .dir   { color: #60a5fa; }
+  .tree .file  { color: #d1d5db; }
+  .tree .note  { color: #6b7280; }
+  .tree .hi    { color: #34d399; }
+
+  /* Flow */
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 12px 0; }
+  .flow-step { background: var(--accent-light); color: var(--info); font-size: 13px; font-weight: 600;
+               padding: 8px 16px; border-radius: 8px; }
+  .flow-arrow { font-size: 18px; color: var(--muted); padding: 0 6px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+  thead th { background: var(--bg); padding: 9px 12px; text-align: left; font-size: 11px;
+             font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--muted);
+             border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); }
+  thead th:first-child { border-left: 1px solid var(--border); border-radius: 8px 0 0 0; }
+  thead th:last-child  { border-right: 1px solid var(--border); border-radius: 0 8px 0 0; }
+  tbody tr:hover { background: #fafafa; }
+  tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody td:first-child { border-left: 1px solid var(--border); }
+  tbody td:last-child  { border-right: 1px solid var(--border); }
+  tbody tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  tbody tr:last-child td:last-child  { border-radius: 0 0 8px 0; }
+
+  .note { background: var(--info-bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0;
+          padding: 10px 14px; font-size: 13px; color: var(--info); margin-top: 14px; }
+
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Automation Framework</h1>
+    <div class="sub">Login &amp; New Test Case Features — Playwright + TypeScript</div>
+    <div class="tags">
+      <span class="tag tag-blue">Playwright</span>
+      <span class="tag tag-blue">TypeScript</span>
+      <span class="tag tag-green">Page Object Model</span>
+      <span class="tag tag-purple">UI + API Tests</span>
+      <span class="tag tag-warn">Runs Offline</span>
+      <span class="tag tag-green">29 Test Cases</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat"><div class="n">29</div><div class="l">Total Tests</div></div>
+    <div class="stat"><div class="n">16</div><div class="l">Smoke Tests</div></div>
+    <div class="stat"><div class="n">19</div><div class="l">UI Tests</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">API Tests</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">Browsers</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">External Dependencies</div></div>
+  </div>
+
+  <!-- 1. Overview -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-blue">📋</div>
+      <div class="stitle">1. Overview</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <p>This framework provides automated test coverage for two core features — <strong>Login</strong> and <strong>New Test Case</strong> — covering both UI interactions and API contracts.</p>
+      <p>It is built with <strong>Playwright</strong> and <strong>TypeScript</strong>, follows the <strong>Page Object Model</strong> pattern, and is designed to run <strong>fully offline</strong> with no external dependencies, no real backend, and no credentials required out of the box.</p>
+      <p>The suite covers positive and negative scenarios across both UI and API layers, matching the test cases defined in the project's Test Cases document (TC-001) and aligned with the framework rules defined in <strong>rules.md</strong>.</p>
+    </div>
+  </div>
+
+  <!-- 2. Architecture -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-purple">🏗</div>
+      <div class="stitle">2. Architecture &amp; Project Structure</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <div class="tree">
+        <div><span class="dir">playwright-suite/</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">app/</span>              <span class="note">← Local mock HTML pages (runs offline)</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">config/</span>           <span class="note">← Environment config (base URLs, credentials)</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">data/</span>             <span class="note">← Test data factories + user credentials</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">fixtures/</span>         <span class="note">← Custom Playwright fixtures (loginPage, authenticatedPage)</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">mocks/</span>            <span class="note">← Route interception handlers for UI tests</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">pages/</span>            <span class="note">← Page Object Model classes</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">utils/</span>            <span class="note">← API client, network capture helper</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">tests/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">e2e/login/</span>             <span class="hi">login.positive.spec.ts</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hi">login.negative.spec.ts</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">e2e/new-test-case/</span>     <span class="hi">new-test-case.positive.spec.ts</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hi">new-test-case.negative.spec.ts</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">api/</span>                   <span class="hi">login.api.spec.ts</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hi">new-test-case.api.spec.ts</span></div>
+        <div>&nbsp;&nbsp;<span class="file">mock-api-server.js</span>    <span class="note">← Real Node.js mock API server (port 4001)</span></div>
+        <div>&nbsp;&nbsp;<span class="file">playwright.config.ts</span>  <span class="note">← Framework configuration</span></div>
+        <div>&nbsp;&nbsp;<span class="file">rules.md</span>              <span class="note">← Coding standards and architecture rules</span></div>
+      </div>
+      <div class="note" style="margin-top:16px">Each feature has its own folder. Positive and negative scenarios are always in separate spec files. No test logic lives in page objects — no page logic lives in spec files.</div>
+    </div>
+  </div>
+
+  <!-- 3. How it runs offline -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-green">🔌</div>
+      <div class="stitle">3. How It Runs Offline</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <p>The framework requires no real application, no real backend, and no credentials to run. This is achieved through two layers:</p>
+      <div class="two-col" style="margin: 14px 0;">
+        <div class="col">
+          <h4>Layer 1 — Local Mock App (port 4000)</h4>
+          <ul>
+            <li>Static HTML pages served by <code>npx serve</code></li>
+            <li>Implements the exact form behaviour from the requirements</li>
+            <li>Frontend validation, error messages, redirects all work as in the real app</li>
+            <li>Started automatically by Playwright before tests run</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Layer 2 — Mock API Server (port 4001)</h4>
+          <ul>
+            <li>Real Node.js HTTP server using no external libraries</li>
+            <li>Handles <code>POST /login</code> and <code>POST /test-cases</code></li>
+            <li>Returns correct status codes: 200, 201, 400, 401</li>
+            <li>Also started automatically by Playwright before tests run</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-step">npm test</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Playwright starts both servers</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Tests run against localhost</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">HTML + JUnit reports generated</div>
+      </div>
+      <p style="margin-top:14px">When a real application is available, a <code>.env</code> file with <code>BASE_URL</code> and <code>API_BASE_URL</code> is all that is needed to switch — no code changes required.</p>
+    </div>
+  </div>
+
+  <!-- 4. Page Object Model -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-blue">📄</div>
+      <div class="stitle">4. Page Object Model</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <p>Every page has a dedicated class that encapsulates all locators and actions. Spec files never interact with the DOM directly — they only call Page Object methods.</p>
+      <div class="two-col" style="margin-top:12px;">
+        <div class="col">
+          <h4>Page Objects</h4>
+          <ul>
+            <li><strong>BasePage</strong> — shared navigate(), waitForNetworkIdle()</li>
+            <li><strong>LoginPage</strong> — login(), fillEmail(), isErrorBannerVisible() etc.</li>
+            <li><strong>NewTestCasePage</strong> — createTestCase(), fillSteps(), isTitleErrorVisible() etc.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Locator Priority (from rules.md)</h4>
+          <ul>
+            <li>ARIA role + name — first choice</li>
+            <li>Label text — form fields</li>
+            <li>Placeholder — fallback for inputs</li>
+            <li>data-testid — for error messages</li>
+            <li>CSS / XPath — last resort only, with comment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Test Structure -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-green">🧪</div>
+      <div class="stitle">5. Test Structure &amp; Coverage</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>UI Positive</th><th>UI Negative</th><th>API Positive</th><th>API Negative</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Login</strong></td><td>3</td><td>5</td><td>2</td><td>3</td><td>13</td></tr>
+          <tr><td><strong>New Test Case</strong></td><td>4</td><td>4</td><td>3</td><td>3</td><td>16</td></tr>
+          <tr><td><strong>Total</strong></td><td>7</td><td>9</td><td>5</td><td>6</td><td><strong>29</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="two-col" style="margin-top:16px;">
+        <div class="col">
+          <h4>Smoke tag (@smoke) — 16 tests</h4>
+          <ul>
+            <li>Run on every build via <code>npm run test:smoke</code></li>
+            <li>Cover all critical happy paths and key failure states</li>
+            <li>Answer the question: is this build shippable?</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Test data</h4>
+          <ul>
+            <li>Randomised via <code>@faker-js/faker</code> factory functions</li>
+            <li>Fixed payloads used where order/value matters</li>
+            <li>Credentials stored in <code>data/users.ts</code>, never hardcoded in specs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Configuration -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-warn">⚙️</div>
+      <div class="stitle">6. Configuration</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <div class="two-col">
+        <div class="col">
+          <h4>Browsers</h4>
+          <ul>
+            <li>Chromium (Desktop Chrome)</li>
+            <li>WebKit (Desktop Safari)</li>
+            <li>Every test runs on both automatically</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Timeouts</h4>
+          <ul>
+            <li>Action timeout: 10 seconds</li>
+            <li>Navigation timeout: 30 seconds</li>
+            <li>Retries: 2 on CI, 0 locally</li>
+          </ul>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:12px;">
+        <div class="col">
+          <h4>Reports generated</h4>
+          <ul>
+            <li>HTML report — <code>reports/html/</code></li>
+            <li>JUnit XML — <code>reports/junit/results.xml</code></li>
+            <li>Live list output in terminal</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Failure artifacts</h4>
+          <ul>
+            <li>Screenshot on failure</li>
+            <li>Video on first retry</li>
+            <li>Trace on first retry</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Running the suite -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="sicon si-gray">▶️</div>
+      <div class="stitle">7. Running the Suite</div>
+      <span class="sarrow">▼</span>
+    </div>
+    <div class="sbody">
+      <table>
+        <thead><tr><th>Command</th><th>What it runs</th></tr></thead>
+        <tbody>
+          <tr><td><code>npm test</code></td><td>Full suite — 29 tests on both browsers</td></tr>
+          <tr><td><code>npm run test:smoke</code></td><td>Smoke tests only — 16 tests, fastest check</td></tr>
+          <tr><td><code>npm run test:e2e</code></td><td>UI tests only</td></tr>
+          <tr><td><code>npm run test:api</code></td><td>API tests only</td></tr>
+          <tr><td><code>npm run test:headed</code></td><td>Full suite with browser visible</td></tr>
+          <tr><td><code>npm run test:report</code></td><td>Open HTML report in browser</td></tr>
+        </tbody>
+      </table>
+      <div class="note">To connect to a real application: create a <code>.env</code> file with <code>BASE_URL</code> and <code>API_BASE_URL</code>. The local servers are skipped automatically when these are set.</div>
+    </div>
+  </div>
+
+</div>
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.sarrow');
+  const collapsed = body.classList.toggle('collapsed');
+  arrow.style.transform = collapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
+}
+</script>
+</body>
+</html>
