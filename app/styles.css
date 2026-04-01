@@ -1,0 +1,26 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;background:#f5f5f7;color:#1d1d1f;font-size:15px}
+nav{background:#1d1d1f;padding:12px 24px;display:flex;gap:16px}
+nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:500}
+.card{background:#fff;border-radius:12px;border:1px solid #d2d2d7;padding:32px;max-width:480px;margin:60px auto;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+h1{font-size:22px;font-weight:700;margin-bottom:24px}
+.field{margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+input[type="email"],input[type="password"],input[type="text"],textarea{width:100%;padding:9px 12px;border:1px solid #d2d2d7;border-radius:8px;font-size:14px;font-family:inherit}
+input:focus,textarea:focus{outline:2px solid #0071e3;border-color:transparent}
+textarea{resize:vertical;min-height:64px}
+.toggle-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.toggle-row label{margin:0;font-size:14px;font-weight:500}
+.btn{display:inline-block;padding:10px 20px;border-radius:8px;border:none;font-size:14px;font-weight:600;cursor:pointer}
+.btn-primary{background:#0071e3;color:#fff;width:100%}
+.btn-secondary{background:#f0f0f5;color:#1d1d1f}
+.error{color:#cf222e;font-size:12px;margin-top:4px;display:none}
+.error.visible{display:block}
+[role="alert"]{background:#ffebe9;border:1px solid #cf222e;border-radius:8px;padding:10px 14px;color:#cf222e;font-size:14px;margin-bottom:16px;display:none}
+[role="alert"].visible{display:block}
+.steps-list{margin-bottom:8px}
+.step-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.step-row input{flex:1}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:#0071e3;font-size:14px;font-weight:500;margin-bottom:20px;cursor:pointer;background:none;border:none}
+.list-card{background:#fff;border-radius:12px;border:1px solid #d2d2d7;padding:24px;max-width:700px;margin:40px auto}
+.list-item{padding:12px 0;border-bottom:1px solid #f0f0f5;font-size:14px}

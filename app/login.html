@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>Login</title><link rel="stylesheet" href="styles.css"/></head>
+<body>
+<nav><a href="login.html">Login</a><a href="admin-login.html">Admin</a></nav>
+<div class="card">
+  <h1>Sign in</h1>
+  <div role="alert" id="error-banner"></div>
+  <form id="login-form" novalidate>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Email"/>
+      <div class="error" id="email-error" data-testid="email-error"></div>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Password"/>
+      <div class="error" id="password-error" data-testid="password-error"></div>
+    </div>
+    <div class="toggle-row">
+      <input type="checkbox" id="remember-me" aria-label="Remember me"/>
+      <label for="remember-me">Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <div style="margin-top:16px;text-align:center"><a href="forgot-password.html">Forgot Password</a></div>
+</div>
+<script>
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const form = document.getElementById('login-form');
+const emailEl = document.getElementById('email');
+const passEl = document.getElementById('password');
+const emailErr = document.getElementById('email-error');
+const passErr = document.getElementById('password-error');
+const banner = document.getElementById('error-banner');
+function show(el,msg){el.textContent=msg;el.classList.add('visible')}
+function clear(el){el.textContent='';el.classList.remove('visible')}
+form.addEventListener('submit', async e => {
+  e.preventDefault(); clear(banner);
+  let ok = true;
+  const email = emailEl.value.trim(), pass = passEl.value;
+  if (!email){show(emailErr,'Email is required');ok=false}
+  else if (!EMAIL_RE.test(email)){show(emailErr,'Please enter a valid email address');ok=false}
+  else clear(emailErr);
+  if (!pass){show(passErr,'Password is required');ok=false}
+  else clear(passErr);
+  if (!ok) return;
+  const res = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass,rememberMe:document.getElementById('remember-me').checked})});
+  if (res.ok){window.location.href='dashboard.html'}else{show(banner,'Invalid email or password')}
+});
+</script>
+</body>
+</html>

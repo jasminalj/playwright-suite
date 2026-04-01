@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>New Test Case</title><link rel="stylesheet" href="styles.css"/></head>
+<body>
+<nav><a href="login.html">Login</a></nav>
+<div class="list-card" style="max-width:600px">
+  <button class="back-btn" onclick="history.back()" type="button">&#8592; Back</button>
+  <h1>New Test Case</h1>
+  <form id="ntc-form" novalidate>
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" id="title" placeholder="Title"/>
+      <div class="error" id="title-error" data-testid="title-error"></div>
+    </div>
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" placeholder="Description"></textarea>
+    </div>
+    <div class="field">
+      <label for="expected-result">Expected Result</label>
+      <textarea id="expected-result" placeholder="Expected Result"></textarea>
+      <div class="error" id="expected-result-error" data-testid="expected-result-error"></div>
+    </div>
+    <div class="field">
+      <label>Test Steps</label>
+      <div class="steps-list" id="steps-list"><div class="step-row"><input type="text" placeholder="Test step" name="step"/></div></div>
+      <button type="button" class="btn btn-secondary" id="add-step-btn">Add Test Step</button>
+      <div class="error" id="steps-error" data-testid="steps-error"></div>
+    </div>
+    <div class="toggle-row" style="margin-top:16px">
+      <input type="checkbox" id="automated" aria-label="Automated"/>
+      <label for="automated">Automated</label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:8px">Submit</button>
+  </form>
+</div>
+<script>
+document.getElementById('add-step-btn').addEventListener('click',()=>{
+  const row=document.createElement('div');row.className='step-row';
+  row.innerHTML='<input type="text" placeholder="Test step" name="step"/>';
+  document.getElementById('steps-list').appendChild(row);
+});
+function show(el,msg){el.textContent=msg;el.classList.add('visible')}
+function clear(el){el.textContent='';el.classList.remove('visible')}
+document.getElementById('ntc-form').addEventListener('submit',async e=>{
+  e.preventDefault(); let ok=true;
+  const title=document.getElementById('title').value.trim();
+  const exp=document.getElementById('expected-result').value.trim();
+  const steps=Array.from(document.querySelectorAll('#steps-list input[name="step"]')).map(i=>i.value.trim()).filter(Boolean);
+  if (!title){show(document.getElementById('title-error'),'Title is required');ok=false}else clear(document.getElementById('title-error'));
+  if (!exp){show(document.getElementById('expected-result-error'),'Expected Result is required');ok=false}else clear(document.getElementById('expected-result-error'));
+  if (!steps.length){show(document.getElementById('steps-error'),'At least one test step is required');ok=false}else clear(document.getElementById('steps-error'));
+  if (!ok) return;
+  const res=await fetch('/api/test-cases',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title,expectedResult:exp,steps,automated:document.getElementById('automated').checked,description:document.getElementById('description').value.trim()||undefined})});
+  if (res.ok){const b=await res.json();sessionStorage.setItem('lastCreated',JSON.stringify(b));window.location.href='test-cases.html'}
+});
+</script>
+</body>
+</html>

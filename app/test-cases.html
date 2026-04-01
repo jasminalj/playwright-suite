@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>Test Cases</title><link rel="stylesheet" href="styles.css"/></head>
+<body>
+<nav><a href="login.html">Login</a></nav>
+<div class="list-card">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h1>Test Cases</h1>
+    <a href="test-cases-new.html" class="btn btn-primary" style="width:auto">+ New</a>
+  </div>
+  <div id="banner" style="display:none;background:#dafbe1;border:1px solid #1a7f37;border-radius:8px;padding:10px 14px;color:#1a7f37;margin-bottom:16px"></div>
+  <div id="list"></div>
+</div>
+<script>
+const saved = sessionStorage.getItem('lastCreated');
+if (saved) {
+  const tc = JSON.parse(saved);
+  document.getElementById('banner').textContent = 'Saved: ' + tc.title;
+  document.getElementById('banner').style.display = 'block';
+  const d = document.createElement('div'); d.className = 'list-item'; d.textContent = tc.title;
+  document.getElementById('list').appendChild(d);
+  sessionStorage.removeItem('lastCreated');
+}
+</script>
+</body>
+</html>

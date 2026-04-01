@@ -1,0 +1,24 @@
+{
+  "name": "automation-suite",
+  "version": "1.0.0",
+  "description": "Smoke/E2E automation suite — Login & New Test Case features",
+  "scripts": {
+    "test":             "npx playwright test",
+    "test:smoke":       "npx playwright test --grep @smoke",
+    "test:e2e":         "npx playwright test tests/e2e",
+    "test:api":         "npx playwright test tests/api",
+    "test:login":       "npx playwright test tests/e2e/login",
+    "test:ntc":         "npx playwright test tests/e2e/new-test-case",
+    "test:headed":      "npx playwright test --headed",
+    "test:report":      "npx playwright show-report reports/html",
+    "install:browsers": "npx playwright install --with-deps chromium webkit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "@faker-js/faker":  "^8.4.1",
+    "@types/node":      "^20.0.0",
+    "typescript":       "^5.4.5",
+    "dotenv":           "^16.4.5",
+    "serve":            "^14.2.3"
+  }
+}
