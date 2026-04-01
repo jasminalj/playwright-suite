@@ -6,8 +6,8 @@ function optional(key: string, fallback = ''): string {
 }
 
 export const env = {
-  baseUrl:       optional('BASE_URL',      'http://localhost:4000'),
-  apiBaseUrl:    optional('API_BASE_URL',  'http://localhost:4000/api'),
+  baseUrl:       optional('BASE_URL',     'http://localhost:4000'),
+  apiBaseUrl:    optional('API_BASE_URL', 'http://localhost:4001'),
   validEmail:    optional('VALID_EMAIL'),
   validPassword: optional('VALID_PASSWORD'),
   adminEmail:    optional('ADMIN_EMAIL'),

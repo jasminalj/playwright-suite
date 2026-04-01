@@ -24,13 +24,22 @@ export default defineConfig({
     navigationTimeout: 30_000,
   },
 
-  webServer: process.env.BASE_URL ? undefined : {
-    command:             'npx serve app -p 4000 --no-clipboard',
-    port:                4000,
-    reuseExistingServer: !process.env.CI,
-    stdout:              'ignore',
-    stderr:              'pipe',
-  },
+  webServer: [
+    {
+      command:             'npx serve app -p 4000 --no-clipboard',
+      port:                4000,
+      reuseExistingServer: !process.env.CI,
+      stdout:              'ignore',
+      stderr:              'pipe',
+    },
+    {
+      command:             'node mock-api-server.js',
+      port:                4001,
+      reuseExistingServer: !process.env.CI,
+      stdout:              'ignore',
+      stderr:              'pipe',
+    },
+  ],
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
